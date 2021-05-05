@@ -14,3 +14,7 @@ CREATE TABLE "pets" (
     "color" VARCHAR (100) NOT NULL,
     "checked_in" BOOLEAN DEFAULT false 
 );
+
+INSERT INTO "pets" (pet_name, owner_name, breed, color, checked_in) VALUES ( %s, %s, %s, %s, %s);
+
+INSERT INTO "owner" (name, "#_of_pets") VALUES ( %s, %s );
