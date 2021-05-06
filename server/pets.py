@@ -22,7 +22,7 @@ def list_pets():
 
     pets = cursor.fetchall()
 
-    return jsonifty(pets) 
+    return jsonify(pets) 
 
     # end GET for pets
 
