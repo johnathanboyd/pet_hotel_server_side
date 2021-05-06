@@ -39,7 +39,7 @@ def add_pet():
     try:
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-        print(pet_name, owner_name, breed, color, checked_in)
+        print(pet_name, breed, color, checked_in)
         insertQuery = "INSERT INTO pets (pet_name, breed, color, checked_in) VALUES (%s, %s, %s, %s)"
 
         cursor.execute(insertQuery, (pet_name, breed, color, checked_in))
