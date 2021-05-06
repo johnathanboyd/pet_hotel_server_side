@@ -27,7 +27,7 @@ def list_pets():
     # end GET for pets
 
 
-@app.route('/api/pets', methods=['POST'])
+@app.route('/api/pets', methods=['GET','POST'])
 def add_pet():
     print('request.json is a dict!', request.json)
     print('if you\'re using multipart/form data, use request.form instead!', request.form)
