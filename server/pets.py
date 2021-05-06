@@ -31,18 +31,18 @@ def list_pets():
 def add_pet():
     print('request.json is a dict!', request.json)
     print('if you\'re using multipart/form data, use request.form instead!', request.form)
-    pet = request.json['pet']
-    breed = request.json['breed']
-    color = reqest.json['color']
-    checked_in = request.json['checked_in']
-    # owner_name = request.json['owner_name']
+    pet_name = 'Kudo'
+    breed = 'Shepard'
+    color = 'Black'
+    # checked_in = 'checked_in'
+    # owner_name = 'owner_name'
     try:
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-        print(pet_name, breed, color, checked_in)
-        insertQuery = "INSERT INTO pets (pet_name, breed, color, checked_in) VALUES (%s, %s, %s, %s)"
+        print(pet_name, breed, color)
+        insertQuery = "INSERT INTO pets (pet_name, breed, color) VALUES (%s, %s, %s)"
 
-        cursor.execute(insertQuery, (pet_name, breed, color, checked_in))
+        cursor.execute(insertQuery, (pet_name, breed, color))
         connection.commit()
         count = cursor.rowcount
         print(count, "Pet Added")
@@ -58,6 +58,7 @@ def add_pet():
     finally: 
         if(cursor):
             cursor.close()
+
 
 
 app.run()
