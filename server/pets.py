@@ -7,7 +7,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 connection = psycopg2.connect(
-    host="127.0.0.1",
+    host="localhost",
     port="5432",
     database="pet_hotel"
 )
@@ -27,15 +27,17 @@ def list_pets():
     # end GET for pets
 
 
-@app.route('/api/pets', methods=['GET','POST'])
+@app.route('/api/pets', methods=['POST'])
 def add_pet():
     print('request.json is a dict!', request.json)
     print('if you\'re using multipart/form data, use request.form instead!', request.form)
-    pet_name = 'Kudo'
-    breed = 'Shepard'
-    color = 'Black'
-    # checked_in = 'checked_in'
-    # owner_name = 'owner_name'
+
+    pet_name = request.json['petName']
+    breed = request.json['petBreed']
+    color = request.json['petColor']
+    
+    # owner_name = request.json['owner_name']
+
     try:
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
