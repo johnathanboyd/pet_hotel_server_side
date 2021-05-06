@@ -60,5 +60,4 @@ def add_pet():
             cursor.close()
 
 
-
 app.run()
