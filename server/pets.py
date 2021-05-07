@@ -12,7 +12,7 @@ connection = psycopg2.connect(
     database="pet_hotel"
 )
 
-@app.route('/', methods=['GET'])
+@app.route('/api/pets', methods=['GET'])
 def list_pets():
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
@@ -61,6 +61,28 @@ def add_pet():
         if(cursor):
             cursor.close()
 
+@app.route('/<id>', methods=['DELETE'])
+def delete_pet(id):
+    # petId = request.json['id']
+    petId = request.json('id')
+    try:
+        cursor = connection.cursor(cursor_factory=RealDictCursor)
+
+        deleteQuery = "DELETE FROM pets WHERE pets.id = (%s)"
+
+        cursor.execute(deleteQuery, (petId))
+        connection.commit()
+
+        print('Deleting pet with id: ', request.json)
+        return 'Pet was deleted'
+    except (Exception, psycopg2.Error) as error:
+
+        print('Failed to delete pet', error)
+        result = {'status': 'ERROR'}
+        return jsonify(result), 500
+    finally:
+        if(cursor):
+            cursor.close()
 
 
 app.run()
