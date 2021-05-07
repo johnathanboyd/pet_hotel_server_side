@@ -53,4 +53,11 @@ def add_owner():
         if(cursor):
             cursor.close()
 
+# @app.route('api/owners', methods=['PUT'])
+# def update_owner():
+#     try:
+#         cursor = connection.cursor(cursor_factory=RealDictCursor)
+
+#         print(name, pets_id )
+#         updateQuery = "UPDATE"
 app.run()    
