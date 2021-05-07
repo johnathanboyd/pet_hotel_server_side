@@ -31,11 +31,13 @@ def list_pets():
 def add_pet():
     print('request.json is a dict!', request.json)
     print('if you\'re using multipart/form data, use request.form instead!', request.form)
+
     pet_name = request.json['petName']
     breed = request.json['petBreed']
     color = request.json['petColor']
     
     # owner_name = request.json['owner_name']
+
     try:
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 

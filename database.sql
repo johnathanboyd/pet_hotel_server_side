@@ -15,16 +15,16 @@ CREATE TABLE "pets" (
     "checked_in" BOOLEAN DEFAULT false 
 );
 
-INSERT INTO "pets" (pet_name, owner_name, breed, color, checked_in) VALUES ( %s, %s, %s, %s, %s);
+INSERT INTO "pets" (pet_name, breed, color, checked_in) VALUES ( %s, %s, %s, %s);
 
 INSERT INTO "owner" (name, pets_id) VALUES ( %s, %s );
 
 -- test data 
 
-INSERT INTO "pets" (pet_name, owner_name, breed, color, checked_in) VALUES 
-('Charlie', 'Chris', 'Shih-tzu', 'Black', false ), 
-('Thorin', 'Chris', 'Rabbit', 'White', false), 
-('Gatsby', 'Ally', 'Cat', 'White', true),
-('Juniper', 'Dane', 'Cat', 'Tabby', false);
+INSERT INTO "pets" (pet_name, breed, color, checked_in) VALUES 
+('Charlie', 'Shih-tzu', 'Black', false ), 
+('Thorin', 'Rabbit', 'White', false), 
+('Gatsby', 'Cat', 'White', true),
+('Juniper', 'Cat', 'Tabby', false);
 
-INSERT INTO "owner" (name, "#_of_pets") VALUES ( 'Chris', 2), ('Ally', 1), ('Dane', 1);
+INSERT INTO "owner" (name, pets_id) VALUES ( 'Chris', 1 ), ('Ally', 3), ('Dane', 4);
