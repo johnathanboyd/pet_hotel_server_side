@@ -7,12 +7,12 @@ app =flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 connection = psycopg2.connect(
-    host="127.0.0.1",
+    host="localhost",
     port="5432",
     database="pet_hotel"
 )
 
-@app.route('/', methods=['GET'])
+@app.route('/owner', methods=['GET'])
 def list_owners():
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
@@ -24,19 +24,19 @@ def list_owners():
     #respond, status 200 is added for us
     return jsonify(owners)
 
-@app.route('api/owners', methods=['POST'])
+@app.route('/owner', methods=['POST'])
 def add_owner():
     print('request.json is a dict!', request.json)
     print('if you\'re using multiform/form data, use request.form instead!', request.form)
-    name = request.json['name']
-    pets_id = request.json['pets_id']
+    name = request.json['owner']
+    # pets_id = request.json['pets_id']
     try:
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-        print(name, pets_id)
-        insertQuery = "INSERT INTO owner (name, pets_id) VALUES (%s, %s)"
+        print(name)
+        insertQuery = "INSERT INTO owner (name) VALUES (%s)"
 
-        cursor.execute(insertQuery, (name, pets_id))
+        cursor.execute(insertQuery, (name))
         connection.commit()
         count = cursor.rowcount
         print(count, "Owner Added")
